@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timetrackerfirebase/app/sign_in/sign_in_page.dart';
+import 'package:timetrackerfirebase/Services/auth.dart';
+import 'package:timetrackerfirebase/app/landing_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: SignInPage(),
+      home: LandingPage(
+        auth: Auth(),
+      ),
     );
   }
 }

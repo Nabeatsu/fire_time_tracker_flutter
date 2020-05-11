@@ -40,7 +40,7 @@ class _LandingPageState extends State<LandingPage> {
       );
     }
     return HomePage(
-      auth: Auth(),
+      auth: widget.auth,
       onSignOut: () => _updateUser(null),
     );
   }
