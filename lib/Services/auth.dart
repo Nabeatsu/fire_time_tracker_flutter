@@ -10,8 +10,8 @@ class User {
 
 abstract class AuthBase {
   Future<User> currentUser();
-  Future<User> signInAnonymously();
   Stream<User> get onAuthStateChanged;
+  Future<User> signInAnonymously();
   Future<User> signInWithGoogle();
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<User> createUserWithEmailAndPassword(String email, String password);
