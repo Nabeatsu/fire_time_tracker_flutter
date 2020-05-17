@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timetrackerfirebase/Services/auth.dart';
-import 'package:timetrackerfirebase/app/sign_in/email_sign_in_form.dart';
+import 'package:timetrackerfirebase/app/sign_in/email_sign_in_form_bloc_based.dart';
 
 class EmailSignInPage extends StatelessWidget {
   @override
@@ -16,7 +16,7 @@ class EmailSignInPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-            child: EmailSignInForm(auth: auth),
+            child: EmailSignInFormBlocBased.create(context),
           ),
         ),
       ),

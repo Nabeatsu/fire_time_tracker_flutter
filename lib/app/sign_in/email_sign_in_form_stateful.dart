@@ -5,16 +5,18 @@ import 'package:timetrackerfirebase/app/sign_in/validators.dart';
 import 'package:timetrackerfirebase/common_widgets/form_submit_button.dart';
 import 'package:timetrackerfirebase/common_widgets/platform_exception_alert_dialog.dart';
 
-enum EmailSignInFormType { signIn, register }
+import 'email_sign_in_model.dart';
 
-class EmailSignInForm extends StatefulWidget with EmailAndPasswordValidators {
-  EmailSignInForm({@required this.auth});
+class EmailSignInFormStateful extends StatefulWidget
+    with EmailAndPasswordValidators {
+  EmailSignInFormStateful({@required this.auth});
   final AuthBase auth;
   @override
-  _EmailSignInFormState createState() => _EmailSignInFormState();
+  _EmailSignInFormStatefulState createState() =>
+      _EmailSignInFormStatefulState();
 }
 
-class _EmailSignInFormState extends State<EmailSignInForm> {
+class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
@@ -35,7 +37,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     super.dispose();
   }
 
-  void _submit() async {
+  Future<void> _submit() async {
     setState(() {
       _submitted = true;
       _isLoading = true;
