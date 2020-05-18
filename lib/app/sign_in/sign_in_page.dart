@@ -9,9 +9,9 @@ import 'package:timetrackerfirebase/app/sign_in/social_sign_in_button.dart';
 import 'package:timetrackerfirebase/common_widgets/platform_exception_alert_dialog.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key, @required this.bloc, @required this.isLoading})
+  const SignInPage({Key key, @required this.manager, @required this.isLoading})
       : super(key: key);
-  final SignInManager bloc;
+  final SignInManager manager;
   final bool isLoading;
 
   static Widget create(BuildContext context) {
@@ -22,8 +22,8 @@ class SignInPage extends StatelessWidget {
         builder: (_, isLoading, __) => Provider<SignInManager>(
           create: (_) => SignInManager(auth: auth, isLoading: isLoading),
           child: Consumer<SignInManager>(
-            builder: (context, bloc, _) => SignInPage(
-              bloc: bloc,
+            builder: (context, manager, _) => SignInPage(
+              manager: manager,
               isLoading: isLoading.value,
             ),
           ),
@@ -41,7 +41,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      await bloc.signInAnonymously();
+      await manager.signInAnonymously();
     } on PlatformException catch (e) {
       _showSignInError(context, e);
     }
@@ -49,7 +49,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      await bloc.signInWithGoogle();
+      await manager.signInWithGoogle();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
