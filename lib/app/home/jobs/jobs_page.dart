@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:timetrackerfirebase/Services/auth.dart';
 import 'package:timetrackerfirebase/Services/database.dart';
+import 'package:timetrackerfirebase/app/home/jobs/edit_job_page.dart';
+import 'package:timetrackerfirebase/app/home/jobs/job_list_tile.dart';
 import 'package:timetrackerfirebase/common_widgets/platform_alert_dialog.dart';
-import 'package:timetrackerfirebase/common_widgets/platform_exception_alert_dialog.dart';
 
 import '../models/job.dart';
 
@@ -48,25 +48,10 @@ class JobsPage extends StatelessWidget {
       ),
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _createJob(context),
+        onPressed: () => EditJobPage.show(context),
         child: Icon(Icons.add),
       ),
     );
-  }
-
-  Future<void> _createJob(BuildContext context) async {
-    try {
-      final database = Provider.of<Database>(context, listen: false);
-      await database.createJob(
-        Job(
-          name: 'Blogging',
-          ratePerHour: 11,
-        ),
-      );
-    } on PlatformException catch (e) {
-      PlatformExceptionAlertDialog(title: 'Operation failed', exception: e)
-          .show(context);
-    }
   }
 
   Widget _buildContents(BuildContext context) {
@@ -76,7 +61,12 @@ class JobsPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final jobs = snapshot.data;
-          final children = jobs.map((job) => Text(job.name)).toList();
+          final children = jobs
+              .map((job) => JobListTile(
+                    job: job,
+                    onTap: () => EditJobPage.show(context, job: job),
+                  ))
+              .toList();
           return ListView(children: children);
         }
         if (snapshot.hasError) {
