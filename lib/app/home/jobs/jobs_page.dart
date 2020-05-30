@@ -6,7 +6,7 @@ import 'package:timetrackerfirebase/Services/database.dart';
 import 'package:timetrackerfirebase/common_widgets/platform_alert_dialog.dart';
 import 'package:timetrackerfirebase/common_widgets/platform_exception_alert_dialog.dart';
 
-import 'models/job.dart';
+import '../models/job.dart';
 
 class JobsPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {

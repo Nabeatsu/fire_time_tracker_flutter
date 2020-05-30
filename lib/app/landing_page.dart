@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timetrackerfirebase/Services/auth.dart';
 import 'package:timetrackerfirebase/Services/database.dart';
-import 'package:timetrackerfirebase/app/home/jobs_page.dart';
+import 'package:timetrackerfirebase/app/home/jobs/jobs_page.dart';
 import 'package:timetrackerfirebase/app/sign_in/sign_in_page.dart';
 
 class LandingPage extends StatelessWidget {
